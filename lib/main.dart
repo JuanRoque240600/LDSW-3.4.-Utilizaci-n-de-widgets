@@ -6,111 +6,53 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'JR MOVIES',
       theme: ThemeData(
-          primarySwatch: Colors.blue, scaffoldBackgroundColor: Colors.white10),
-      debugShowCheckedModeBanner: false, // Remove the debug banner
-      home: Scaffold(
-        body: Row(
-          children: <Widget>[
-            // Content of my Row
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(title: 'JR MOVIE'),
+    );
+  }
+}
 
-            //Item 1/4
-            Container(
-              padding: const EdgeInsets.all(20),
-              color: Colors.red,
-              child: const Text.rich(
-                TextSpan(
-                  text: 'Hello', // default text style
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: ' beautiful ',
-                        style: TextStyle(fontStyle: FontStyle.italic)),
-                    TextSpan(
-                        text: 'world',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                  ],
-                ),
-              ),
-            ),
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
-            //Item 2/4
-            Container(
-              padding: const EdgeInsets.all(20),
-              color: Colors.yellow,
-              child: const Text.rich(
-                TextSpan(
-                  text: 'Hello', // default text style
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: ' beautiful ',
-                        style: TextStyle(fontStyle: FontStyle.italic)),
-                    TextSpan(
-                        text: 'world',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                  ],
-                ),
-              ),
-            ),
+  final String title;
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
 
-            //Item 3/4
-            SizedBox(
-              width: 250,
-              height: 250,
-              child: Stack(
-                children: <Widget>[
-                  Container(
-                    width: 250,
-                    height: 250,
-                    color: Colors.white,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(5.0),
-                    alignment: Alignment.bottomCenter,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: <Color>[
-                          Colors.black.withAlpha(0),
-                          Colors.black12,
-                          Colors.black45
-                        ],
-                      ),
-                    ),
-                    child: const Text(
-                      'Foreground Text',
-                      style: TextStyle(color: Colors.white, fontSize: 20.0),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
 
-            //Item 4/4
-            Container(
-              padding: const EdgeInsets.all(20),
-              color: Colors.green,
-              child: const Text.rich(
-                TextSpan(
-                  text: 'Hello', // default text style
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: ' beautiful ',
-                        style: TextStyle(fontStyle: FontStyle.italic)),
-                    TextSpan(
-                        text: 'world',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                  ],
-                ),
-              ),
-            ),
-          ],
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'JR MOVIES',
+      home: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("icon,jpg.jpg"), fit: BoxFit.cover)),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            title: Text('Bienvenido a Mi catalogo'),
+            centerTitle: true,
+            leading: IconButton(
+                icon: Icon(Icons.list, color: Colors.black), onPressed: () {}),
+          ),
         ),
       ),
     );
