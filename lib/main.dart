@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(const MyApp());
@@ -57,4 +60,46 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
+
+var url =
+    Uri.https('"https://api.thecatapi.com/v1/categories"', 'whatsit/create');
+
+Future<dynamic> _getListado() async {
+  final respuesta = await http.get(url);
+
+  if (respuesta.statusCode == 200) {
+    return jsonDecode(respuesta.body);
+  } else {
+    print("Error con la respusta");
+  }
+}
+
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+      appBar: AppBar(
+        title: Text("Listado API"),
+      ),
+      body: FutureBuilder<dynamic>(
+        future: _getListado(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            print(snapshot);
+            return ListView(children: listado(snapshot.data));
+          } else {
+            print("No hay información");
+            return Text("Sin data");
+          }
+        },
+        initialData: Center(child: CircularProgressIndicator()),
+      ));
+}
+
+List<Widget> listado(List<dynamic> info) {
+  List<Widget> lista = [];
+  info.forEach((elemento) {
+    lista.add(Text(elemento["name"]));
+  });
+  return lista;
 }
